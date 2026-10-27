@@ -1,0 +1,68 @@
+package com.anbutravels.app
+
+import android.app.Activity
+import android.os.Bundle
+import android.graphics.Color
+import android.view.Gravity
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Button
+import android.content.Intent
+import android.net.Uri
+
+class MainActivity : Activity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val layout = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            gravity = Gravity.CENTER
+            setPadding(28, 32, 28, 32)
+            setBackgroundColor(Color.WHITE)
+        }
+
+        val title = TextView(this).apply {
+            text = "ANBU TRAVELS"
+            textSize = 30f
+            setTextColor(Color.rgb(13, 91, 65))
+            gravity = Gravity.CENTER
+        }
+
+        val subtitle = TextView(this).apply {
+            text = "\nYour journey, our responsibility!\n"
+            textSize = 18f
+            setTextColor(Color.DKGRAY)
+            gravity = Gravity.CENTER
+        }
+
+        val callButton = Button(this).apply {
+            text = "Call for Booking"
+            setOnClickListener {
+                val intent = Intent(
+                    Intent.ACTION_DIAL,
+                    Uri.parse("tel:")
+                )
+                startActivity(intent)
+            }
+        }
+
+        val whatsappButton = Button(this).apply {
+            text = "WhatsApp Booking"
+            setOnClickListener {
+                val intent = Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://wa.me/")
+                )
+                startActivity(intent)
+            }
+        }
+
+        layout.addView(title)
+        layout.addView(subtitle)
+        layout.addView(callButton)
+        layout.addView(whatsappButton)
+
+        setContentView(layout)
+    }
+}
